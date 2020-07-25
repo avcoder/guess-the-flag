@@ -10,6 +10,10 @@ const capitalText = document.querySelector('#capitalText');
 const populationText = document.querySelector('#populationText');
 const currencyText = document.querySelector('#currencyText');
 const languagesText = document.querySelector('#languagesText');
+const soundAnswer = document.querySelector('audio');
+soundAnswer.volume = 0.07;
+
+let timeoutId = 0;
 
 
 // we are going to store our fetched json countries here
@@ -59,6 +63,15 @@ function showAnswer() {
     populationText.textContent = formatNumber(country.population);
     currencyText.textContent = country.currencies.map(money => `${money.name}`).join(', ');
     languagesText.textContent = country.languages.map(lang => lang.name).join(', ');
+    
+    // add button animation 
+    timeoutId = setTimeout(() => {
+        btn.classList.add('pulse');
+    }, 3000)
+
+    // rewind then play sound
+    soundAnswer.currentTime = 0;
+    soundAnswer.play();
 }
 
 function clearAnswer() {
@@ -72,13 +85,16 @@ function clearAnswer() {
 
 function btnClicked() {
     if (btn.textContent == "Answer") {
+        btn.classList.remove('pulse');
         leafletMap.show({lat: country.latlng[0], lng: country.latlng[1], name: country.name });
         showAnswer();
     } else {
+        clearTimeout(timeoutId);
         btn.textContent = "Answer";
         clearAnswer();
         startGame();
     }
 }
+
 
 btn.addEventListener('click', btnClicked);

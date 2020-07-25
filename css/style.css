@@ -43,6 +43,7 @@ h1 {
     background-color: rgba(250, 250, 250, 0.2);
     font-size: 40px;
     padding: 10px;
+    border-radius: 20px;
 }
 
 h2 {
@@ -57,7 +58,7 @@ ul {
     list-style-type: none;
     font-size: 20px;
     text-align: left;
-    margin-top: 70px;
+    margin-top: 40px;
 }
 
 li { 
@@ -70,4 +71,16 @@ li {
 .ctr { 
     margin: 0 auto; 
     width: 400px;
+}
+
+.pulse {
+    animation: pulseAnimation 0.3s;
+}
+
+@keyframes pulseAnimation {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+    100% {  transform: scale(1); }
 }
